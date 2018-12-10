@@ -32,7 +32,7 @@
       
     var loader = new THREE.TextureLoader();
     var geometry = new THREE.SphereGeometry( 1, 32, 16 );
-    var material = new THREE.MeshStandardMaterial({
+    var material = new THREE.MeshStandardMaterial ({
       color: 0xccffcc,
       map: loader.load('book_quran.png')});
     var mesh = new THREE.Mesh( geometry, material );
@@ -51,7 +51,7 @@
     
     var particle_material = new THREE.PointsMaterial({
       size: 0.01,
-      color: 0x80ffccaa;
+      color: 0x80ffccaa,
       blending: THREE.AdditiveBlending,
       transparent: true,
       depthTest: true
@@ -64,7 +64,7 @@
     camera.position.z = 3;
     
     var clock = new THREE.Clock();
-    var render = function(){
+    var render = function () {
       requestAnimationFrame( render );
       
       var delta_time = clock.getDelta();
