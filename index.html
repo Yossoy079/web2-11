@@ -24,11 +24,42 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       }; false );
+    
+    // ライティング
+    var light = new THREE.DirectionalLight(0xcccccc);
+    light.position.set(0,100,30);
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0x666666));
       
-    var geometry = new THREE.BoxGeometry( 1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({color: 0xccffcc});
+    var loader = new THREE.TextureLoader();
+    var geometry = new THREE.BoxGeometry( 1, 32, 16 );
+    var material = new THREE.MeshBasicMaterial({
+      color: 0xccffcc,
+      map: loader.load('earth.jpg')});
+    });
     var mesh = new THREE.Mesh( geometry, material );
     scene.add( mesh );
+    
+    var particle_geometry = new THREE.Geometry();
+    var numParticles = 2000;
+    for(var i = 0; i < numParticles; i++){
+      particle_geometry.vertices.push(
+        new THREE.Vector3(
+          Math.random() * 20 - 10,
+          Math.random() * 20 - 10,
+          Math.random() * 20 - 10));
+    }
+    
+    var particle_material = new THREE.PointsMaterial({
+      size: 0.01,
+      color: 0x80ffccaa;
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      epthTest: true
+    });
+    
+    var emitter = new THREE.Points(particle_geometry, particle_material);
+    scene.add(emitter);
     
     camera.position.z = 5;
     
@@ -36,7 +67,7 @@
     var render = function(){
       requestAnimationFrame( render );
       
-      var delta?time = clock.getDelta();
+      var delta_time = clock.getDelta();
       mesh.rotation.x += 0.1 * delta_time;
       mesh.rotation.y += 0.3 * delta_time;
       
