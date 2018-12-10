@@ -68,7 +68,7 @@
       requestAnimationFrame( render );
       
       var delta_time = clock.getDelta();
-      mesh.position.x = Math.sin(Math.PI * 2 / 240 * delta_time) + window.innerWidth / 2;
+      mesh.position.x = Math.cos(Math.PI * 2 / 240 * delta_time) + window.innerWidth / 2;
       mesh.rotation.x += 0.1 * delta_time;
       mesh.rotation.y += 0.3 * delta_time;
       
