@@ -33,10 +33,9 @@
       
     var loader = new THREE.TextureLoader();
     var geometry = new THREE.BoxGeometry( 1, 32, 16 );
-    var material = new THREE.MeshBasicMaterial({
+    var material = new THREE.MeshStandardMaterial({
       color: 0xccffcc,
       map: loader.load('book_quran.png')});
-    });
     var mesh = new THREE.Mesh( geometry, material );
     scene.add( mesh );
     
