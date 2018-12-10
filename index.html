@@ -25,20 +25,20 @@
       camera.updateProjectionMatrix();
      }, false );
     
-    // ライティング
     var light = new THREE.DirectionalLight(0xcccccc);
     light.position.set(0,100,30);
     scene.add(light);
     scene.add(new THREE.AmbientLight(0x666666));
       
     var loader = new THREE.TextureLoader();
-    var geometry = new THREE.BoxGeometry( 1, 32, 16 );
+    var geometry = new THREE.SphereGeometry( 1, 32, 16 );
     var material = new THREE.MeshStandardMaterial({
       color: 0xccffcc,
       map: loader.load('book_quran.png')});
     var mesh = new THREE.Mesh( geometry, material );
     scene.add( mesh );
     
+    //パーティクル
     var particle_geometry = new THREE.Geometry();
     var numParticles = 2000;
     for(var i = 0; i < numParticles; i++){
@@ -54,13 +54,14 @@
       color: 0x80ffccaa;
       blending: THREE.AdditiveBlending,
       transparent: true,
-      epthTest: true
+      depthTest: true
     });
     
+    //物体を作成
     var emitter = new THREE.Points(particle_geometry, particle_material);
     scene.add(emitter);
     
-    camera.position.z = 5;
+    camera.position.z = 3;
     
     var clock = new THREE.Clock();
     var render = function(){
@@ -71,8 +72,8 @@
       mesh.rotation.y += 0.3 * delta_time;
       
       renderer.render(scene, camera);
-      };
-      render();
-    </script>
+    };
+    render();
+  </script>
   </body>
 </html>
